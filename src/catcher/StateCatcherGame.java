@@ -5,6 +5,7 @@ import java.awt.Graphics2D;
 public class StateCatcherGame implements GameState {
 
 //	private BufferedImage imgBunny;
+<<<<<<< HEAD
 	private GameObject userBucket;
 	
 	public StateCatcherGame() {
@@ -14,6 +15,11 @@ public class StateCatcherGame implements GameState {
 		userBucket.setHeight(32);
 		userBucket.setX(0);
 		userBucket.setY(Main.GAME_HEIGHT-userBucket.getHeight());
+=======
+	
+	public StateCatcherGame() {
+//		imgBunny = getImg("Bunny");
+>>>>>>> 91f0bfd0b6f2b0d368e5757e44a7ae5e14108af8
 	}
 	
 	@Override
