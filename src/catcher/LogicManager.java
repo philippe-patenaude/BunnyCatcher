@@ -8,7 +8,7 @@ public class LogicManager {
 	
 	public static final LogicManager instance = new LogicManager();
 	
-	public static void addLogic(Logic lgc) {
+	public static void addLogic(Trigger lgc) {
 		instance.add(lgc);
 	}
 	
@@ -16,16 +16,16 @@ public class LogicManager {
 		instance.run();
 	}
 	
-	private List<Logic> logics = new ArrayList<Logic>();
+	private List<Trigger> logics = new ArrayList<Trigger>();
 	
-	private void add(Logic lgc) {
+	private void add(Trigger lgc) {
 		logics.add(lgc);
 	}
 	
 	private void run() {
 		
-		final List<Logic> removeList = new LinkedList<Logic>();
-		for (Logic lgc : logics) {
+		final List<Trigger> removeList = new LinkedList<Trigger>();
+		for (Trigger lgc : logics) {
 			if (lgc.checkConditions()) {
 				lgc.runLogic();
 				if (lgc.runOnce()) {

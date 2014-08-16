@@ -26,7 +26,7 @@ public class Main extends JPanel {
 		win.pack();
 		win.setVisible(true);
 		win.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
+//		INPUT.setPanel(win);
 		// runs the game loop
 		content.runGame();
 		
@@ -36,11 +36,15 @@ public class Main extends JPanel {
 	public static final int WINDOW_HEIGHT = 480;
 	public static final int GAME_WIDTH = 320;
 	public static final int GAME_HEIGHT = 240;
+	
+	public static final InputManager INPUT = new InputManager();
 
 	// for the game loop
     public final static long FPS = 60; // frames per second
     private final static long TPS = 1000000000; // ticks per second
     private final static long TPF = TPS/FPS; // ticks per frame
+
+    private long currentGameFrame = 0;
     
     private GameState state = new StateCatcherGame();
     
@@ -50,6 +54,10 @@ public class Main extends JPanel {
 	private Main() {
 		this.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
 		this.setPreferredSize(new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT));
+		INPUT.setPanel(this);
+		
+		this.setFocusable(true);
+		this.requestFocus();
 	}
 	
 	private void runGame() {
@@ -58,8 +66,6 @@ public class Main extends JPanel {
         long counter = 0;
         boolean gameOver = false;
         long frames;
-        
-        long currentGameFrame = 0;
         
         while (gameOver == false) { // game loop
             
@@ -92,7 +98,7 @@ public class Main extends JPanel {
 		
 		Graphics2D g2 = (Graphics2D)backbuffer.getGraphics();
 		
-		state.draw(g2);
+		state.draw(g2, currentGameFrame);
 		
 		g2.dispose();
 		

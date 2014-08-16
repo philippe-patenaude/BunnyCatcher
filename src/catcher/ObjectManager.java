@@ -20,8 +20,8 @@ public class ObjectManager {
 		instance.update();
 	}
 	
-	public static void drawObjects(Graphics2D g) {
-		instance.draw(g);
+	public static void drawObjects(Graphics2D g, long gameFrame) {
+		instance.draw(g, gameFrame);
 	}
 	
 	private List<GameObject> objects;
@@ -46,9 +46,9 @@ public class ObjectManager {
 		}
 	}
 	
-	private void draw(Graphics2D g) {
+	private void draw(Graphics2D g, long gameFrame) {
 		for (GameObject obj : objects) {
-			obj.draw(g);
+			obj.draw(g, gameFrame);
 		}
 	}
 	

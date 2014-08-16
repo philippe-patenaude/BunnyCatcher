@@ -30,6 +30,8 @@ public class ResourceManager {
 	private void loadImages() {
 		try {
 			imgMap.put("Bunny", loadImage("Bunny.png"));
+			imgMap.put("BunnyAnim", loadImage("BunnyAnim.png"));
+			imgMap.put("Basket", loadImage("Basket.png"));
 		} catch (IOException e) {
 			JOptionPane.showMessageDialog(null, "Image could not be loaded: " + e.getMessage());
 		}
@@ -42,8 +44,10 @@ public class ResourceManager {
 	    ClassLoader cldr = Main.class.getClassLoader();
 	    URL url = cldr.getResource("" + name);
 
-	    if (url == null)
-	        JOptionPane.showMessageDialog(null, "no good");
+	    if (url == null) {
+	        JOptionPane.showMessageDialog(null, "The image \"" + name + "\" could not be loaded.");
+	        return null;
+	    }
 
 	    img = ImageIO.read(url);
 	    return img;

@@ -68,7 +68,7 @@ public abstract class GameObject {
 				getY() + getHeight() >= obj.getY());
 	}
 	
-	public abstract void draw(Graphics2D g);
+	public abstract void draw(Graphics2D g, long gameFrame);
 	
 	public void onCollide(GameObject obj) {}
 	

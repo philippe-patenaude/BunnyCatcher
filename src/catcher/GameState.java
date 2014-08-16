@@ -6,6 +6,6 @@ public interface GameState {
 
 	public String getName();
 	public void update(long gameFrame);
-	public void draw(Graphics2D g);
+	public void draw(Graphics2D g, long gameFrame);
 	
 }

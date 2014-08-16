@@ -3,14 +3,15 @@ package catcher;
 
 public class Bunny extends BasicObject {
 	
-	private Logic deleteOnTouchBottom;
+	private Trigger deleteOnTouchBottom;
 	
 	public Bunny() {
 		
-		super(ResourceManager.getImg("Bunny"));
+//		super(ResourceManager.getImg("Bunny"));
+		super(ResourceManager.getImg("BunnyAnim"), 32, 32, 4, (int)(Math.floor(Math.random()*4)), 5);
 		
 		// add logic
-		deleteOnTouchBottom = new Logic() {
+		deleteOnTouchBottom = new Trigger() {
 
 			@Override
 			public boolean checkConditions() {
