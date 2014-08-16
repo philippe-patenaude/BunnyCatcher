@@ -61,6 +61,15 @@ public abstract class GameObject {
 		setY(getY() + getVy());
 	}
 	
+	public boolean doesCollide(GameObject obj) {
+		return (getX() <= obj.getX() + obj.getWidth() &&
+				getX() + getWidth() >= obj.getX() &&
+				getY() <= obj.getY() + obj.getHeight() &&
+				getY() + getHeight() >= obj.getY());
+	}
+	
 	public abstract void draw(Graphics2D g);
+	
+	public void onCollide(GameObject obj) {}
 	
 }

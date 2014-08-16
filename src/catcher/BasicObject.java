@@ -9,6 +9,7 @@ public class BasicObject extends GameObject {
 	
 	public BasicObject(BufferedImage img) {
 		this.img = img;
+		ObjectManager.addObject(this);
 	}
 	
 	@Override

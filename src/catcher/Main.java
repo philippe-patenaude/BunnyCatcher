@@ -1,6 +1,5 @@
 package catcher;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -10,6 +9,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class Main extends JPanel {
+
+	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @param args
@@ -24,14 +25,17 @@ public class Main extends JPanel {
 		win.setLocation(100, 100);
 		win.pack();
 		win.setVisible(true);
+		win.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		// runs the game loop
 		content.runGame();
 		
 	}
 	
-	public static final int GAME_WIDTH = 640;
-	public static final int GAME_HEIGHT = 480;
+	public static final int WINDOW_WIDTH = 640;
+	public static final int WINDOW_HEIGHT = 480;
+	public static final int GAME_WIDTH = 320;
+	public static final int GAME_HEIGHT = 240;
 
 	// for the game loop
     public final static long FPS = 60; // frames per second
@@ -40,9 +44,12 @@ public class Main extends JPanel {
     
     private GameState state = new StateCatcherGame();
     
+	// back buffer
+	private BufferedImage backbuffer = new BufferedImage(GAME_WIDTH, GAME_HEIGHT, BufferedImage.TYPE_INT_ARGB);
+    
 	private Main() {
-		this.setSize(GAME_WIDTH, GAME_HEIGHT);
-		this.setPreferredSize(new Dimension(GAME_WIDTH, GAME_HEIGHT));
+		this.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+		this.setPreferredSize(new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT));
 	}
 	
 	private void runGame() {
@@ -52,14 +59,17 @@ public class Main extends JPanel {
         boolean gameOver = false;
         long frames;
         
+        long currentGameFrame = 0;
+        
         while (gameOver == false) { // game loop
             
             // update loop
             while (counter > 0) {
                 // updating code goes here
-            	update();
+            	update(currentGameFrame);
                 // we have updated once, decrement counter
                 counter--;
+                currentGameFrame++;
             }
             // drawing code goes here
             draw();
@@ -72,23 +82,21 @@ public class Main extends JPanel {
         
 	}
 	
-	private void update() {
-		state.update();
+	private void update(long gameFrame) {
+		state.update(gameFrame);
 	}
 	
 	private void draw() {
 		
 		Graphics2D g = (Graphics2D)this.getGraphics();
 		
-		BufferedImage img = new BufferedImage(GAME_WIDTH, GAME_HEIGHT, BufferedImage.TYPE_INT_ARGB);
-
-		Graphics2D g2 = (Graphics2D)img.getGraphics();
+		Graphics2D g2 = (Graphics2D)backbuffer.getGraphics();
 		
 		state.draw(g2);
 		
 		g2.dispose();
 		
-		g.drawImage(img, 0, 0, null);
+		g.drawImage(backbuffer, 0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, null);
 		
 		g.dispose();
 		

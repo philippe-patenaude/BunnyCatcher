@@ -12,6 +12,10 @@ public class ObjectManager {
 		instance.objects.add(obj);
 	}
 	
+	public static void removeObject(GameObject obj) {
+		instance.objects.remove(obj);
+	}
+	
 	public static void updateObjects() {
 		instance.update();
 	}
@@ -29,6 +33,16 @@ public class ObjectManager {
 	private void update() {
 		for (GameObject obj : objects) {
 			obj.update();
+		}
+		for (int i = 0; i < objects.size()-1; i++) {
+			for (int j = i+1; j < objects.size(); j++) {
+				GameObject obj1 = objects.get(i);
+				GameObject obj2 = objects.get(j);
+				if (obj1.doesCollide(obj2)) {
+					obj1.onCollide(obj2);
+					obj2.onCollide(obj1);
+				}
+			}
 		}
 	}
 	

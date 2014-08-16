@@ -2,14 +2,12 @@ package catcher;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
-import static catcher.ResourceManager.*;
 public class StateCatcherGame implements GameState {
 
-	private BufferedImage imgBunny;
+//	private BufferedImage imgBunny;
 	
 	public StateCatcherGame() {
-		imgBunny = getImg("Bunny");
+//		imgBunny = getImg("Bunny");
 	}
 	
 	@Override
@@ -18,17 +16,27 @@ public class StateCatcherGame implements GameState {
 	}
 
 	@Override
-	public void update() {
+	public void update(long gameFrame) {
+		
+		// spawn bunnies here
+		if (gameFrame % 60 == 0) {
+			new Bunny();
+		}
+		
+		ObjectManager.updateObjects();
+		LogicManager.runLogic();
 		
 	}
 
 	@Override
 	public void draw(Graphics2D g) {
 
-		g.setColor(Color.RED);
+		// draw background
+		g.setColor(Color.CYAN);
 		g.fillRect(0, 0, Main.GAME_WIDTH, Main.GAME_HEIGHT);
 		
-		g.drawImage(imgBunny, 0, 0, null);
+		// draw objects
+		ObjectManager.drawObjects(g);
 		
 	}
 
